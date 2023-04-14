@@ -12,7 +12,7 @@
 		"gcc": {
 			"patterns": [
 				{
-					"match": "error: .*$",
+					"match": "error:",
 					"name": "markup.other.log.error"
 				},
 				{
@@ -24,21 +24,52 @@
 					"name": "markup.other.log.error"
 				},
 				{
-					"match": "warning: .*$",
+					"match": "warning:",
 					"name": "markup.other.log.warn"
 				},
 				{
-					"match": "note: .*$",
+					"match": "note:",
 					"name": "markup.other.log.info"
 				},
 				{
-					"begin": "In function ",
-					"end": ":",
-					"captures": { "0": { "name": "markup.other.log.info" } },
-					"contentName": "meta.embedded.block.cpp",
-					"patterns": [ {"include": "source.cpp"} ]
+					"begin": "stdexec::_ERROR_<",
+					"end": ">",
+					"name": "markup.other.log.error",
+					"contentName": "markup.other.log.error",
+					"patterns": [ {"include": "#tparams"} ]
+				},
+				{
+					"begin": "stdexec::_WARNING_<",
+					"end": ">",
+					"name": "markup.other.log.warn",
+					"contentName": "markup.other.log.warn",
+					"patterns": [ {"include": "#tparams"} ]
+				},
+				{
+					"match": "~*\\^~*",
+					"name": "markup.other.log.warn"
+				},
+				{
+					"match": "[ \\t]+[0-9]+[ \\t]+\\|(.*)$",
+					"captures": { "1": { "name": "markup.other.log.warn" } }
 				}
-			]
+			],
+			"repository": {
+				"tparams": {
+				   "begin": "<",
+				   "end": ">",
+				   "patterns": [
+						{
+							"begin": "\"",
+							"end": "\"",
+							"name": "markup.bold.log.error"
+						},
+					  	{
+							"include": "#tparams"
+						}
+				   ]
+				}
+			}
 		},
 		"clang": {
 			"patterns": [
@@ -53,10 +84,6 @@
 				{
 					"match": "warning C[0-9]+: .*$",
 					"name": "markup.other.log.warn"
-				},
-				{
-					"match": "note: .*$",
-					"name": "markup.other.log.info"
 				}
 			]
 		},
