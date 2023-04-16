@@ -3,19 +3,41 @@
 	"publisher": "EricNiebler",
 	"displayName": "Eric's Build Output Colorizer",
 	"description": "Colorizes output log for VSCode hosted builds",
-	"version": "0.1.3",
+	"version": "0.2.0",
+	"engines": {
+		"vscode": "^1.77.0"
+	},
 	"repository": {
 		"url": "https://github.com/ericniebler/buildoutputcolorizer"
 	},
 	"license": "MIT",
 	"icon": "assets/schwa-icon.jpg",
-	"engines": {
-		"vscode": "^1.73.0"
-	},
 	"categories": [
 		"Formatters"
 	],
+	"activationEvents": [
+		"onLanguage"
+	],
+	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Eric's Build Output Colorizer configuration",
+			"properties": {
+				"erics-build-output-colorizer.languagesIds": {
+					"type": "array",
+					"default": [
+						"erics-build-output-colorizer",
+						"log",
+						"Log",
+						"code-runner-output",
+						"BuildOutput"
+					],
+					"description": "Set the languages ids to provide links for.",
+					"scope": "resource"
+				}
+			}
+		},
 		"configurationDefaults": {
 			"editor.tokenColorCustomizations": {
 				"textMateRules": [
@@ -29,7 +51,7 @@
 						"scope": "markup.bold.log.error",
 						"settings": {
 							"foreground": "#FF0000",
-							"fontStyle": "bold underline"
+							"fontStyle": "bold italic"
 						}
 					},
 					{
@@ -75,7 +97,7 @@
 		"grammars": [
 			{
 				"language": "BuildOutput",
-				"scopeName": "code.log",
+				"scopeName": "source.log",
 				"path": "./syntaxes/log.tmLanguage.json",
 				"embeddedLanguages": {
 					"meta.embedded.block.cpp": "c++",
@@ -83,5 +105,26 @@
 				}
 			}
 		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.77.0",
+		"@types/glob": "^8.1.0",
+		"@types/mocha": "^10.0.1",
+		"@types/node": "16.x",
+		"@typescript-eslint/eslint-plugin": "^5.56.0",
+		"@typescript-eslint/parser": "^5.56.0",
+		"eslint": "^8.36.0",
+		"glob": "^8.1.0",
+		"mocha": "^10.2.0",
+		"typescript": "^4.9.5",
+		"@vscode/test-electron": "^2.3.0"
 	}
 }

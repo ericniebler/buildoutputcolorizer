@@ -8,17 +8,25 @@ stripped away. It recognizes errors and warnings generated from the
 [stdexec](https://github.com/NVIDIA/stdexec) library and highlights them to make
 it easier to diagnose what is going wrong.
 
+It also borrows code from Michael Barros'
+[Output Link To File](https://marketplace.visualstudio.com/items?itemName=93akkord.output-link-to-file)
+to turn output strings like <code>"&lt;<em>file-path</em>>:&lt;<em>line</em>>:&lt;<em>column</em>></code>"
+into links that take you to the referenced bit of code.
+
 ## Features
 
-This no-code extension associates syntax highlighting rules to the Output window
+This extension associates syntax highlighting rules to the Output window
 scope, and uses regexes to select and highlight patterns that are probably
 error/warning diagnostics.
+
+It also uses regexes to find references to the source code and turn them
+into clickable links.
 
 ![Example Output](assets/screenshot1.png "Example Output")
 
 ## Requirements
 
-This extensions should not have any prerequisites or requirements.  The
+This extensions should not have any prerequisites or requirements. The
 highlighting rules should work with any theme, but the colors are not
 theme-based (though they are customizable via settings).
 
@@ -27,44 +35,47 @@ theme-based (though they are customizable via settings).
 This extension changes the default for `editor.tokenColorCustomizations` to
 allow customization of the highlighting.  If you have customizations already,
 you may need to manually add color settings for the TextMate tokens shown below:
-```
+
+```json
 {
     "editor.tokenColorCustomizations": {
-    "textMateRules": [
-        {
-            "scope" : "markup.other.log.error",
-            "settings": { "foreground": "#FF0000" }
-        },
-        {
-            "scope" : "markup.bold.log.error",
-            "settings": {
-                "foreground": "#FF0000",
-                "fontStyle": "bold underline"
+        "textMateRules": [
+            {
+                "scope" : "markup.other.log.error",
+                "settings": { "foreground": "#FF0000" }
             },
-        },
-        {
-            "scope" : "markup.other.log.warn",
-            "settings": { "foreground": "#c500f7cc" }
-        },
-        {
-            "scope" : "markup.other.log.info",
-            "settings": { "foreground": "#2cd3c5" }
-        },
-        {
-            "scope" : "markup.other.log.debug",
-            "settings": { "foreground": "#888585" }
-        },
-        {
-            "scope" : "markup.other.log.highlight",
-            "settings": { "foreground": "#19ff04" }
-        }
-    ]
+            {
+                "scope" : "markup.bold.log.error",
+                "settings": {
+                    "foreground": "#FF0000",
+                    "fontStyle": "bold italic"
+                },
+            },
+            {
+                "scope" : "markup.other.log.warn",
+                "settings": { "foreground": "#c500f7cc" }
+            },
+            {
+                "scope" : "markup.other.log.info",
+                "settings": { "foreground": "#2cd3c5" }
+            },
+            {
+                "scope" : "markup.other.log.debug",
+                "settings": { "foreground": "#888585" }
+            },
+            {
+                "scope" : "markup.other.log.highlight",
+                "settings": { "foreground": "#19ff04" }
+            }
+        ]
     }
 }
 ```
+
 This also allows for customization to your preferences.
 
 ## Known Issues
+
 This extension has a quite limited set of syntax highlighting rules since
 normally the objective of compiler diagnostics is to draw the user's eye to the
 highest priority items.
