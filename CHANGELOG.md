@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.1
+* Recognize file:line output from nvc++
+* Bug fixes
+
 ## 0.2.0
 * Add clickable links to referenced lines of source code
 

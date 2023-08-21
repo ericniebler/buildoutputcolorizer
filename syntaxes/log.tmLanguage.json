@@ -3,16 +3,25 @@
 	"name": "Log",
 	"scopeName": "source.log",
 	"patterns": [
+		{ "include": "#nvc++" },
 		{ "include": "#gcc" },
 		{ "include": "#clang" },
 		{ "include": "#msvc" },
 		{ "include": "#cmake" }
 	],
 	"repository": {
+		"nvc++": {
+			"patterns": [
+				{
+					"match": "catastrophic error(?=:)",
+					"name": "markup.other.log.error"
+				}
+			]
+		},
 		"gcc": {
 			"patterns": [
 				{
-					"match": "error:",
+					"match": "\\berror(?=:)",
 					"name": "markup.other.log.error"
 				},
 				{
@@ -24,11 +33,11 @@
 					"name": "markup.other.log.error"
 				},
 				{
-					"match": "warning:",
+					"match": "\\bwarning(?=:)",
 					"name": "markup.other.log.warn"
 				},
 				{
-					"match": "note:",
+					"match": "\\bnote(?=:)",
 					"name": "markup.other.log.info"
 				},
 				{
@@ -46,6 +55,13 @@
 					"patterns": [ {"include": "#tparams"} ]
 				},
 				{
+					"begin": "exec::_FAILURE_TO_CONNECT_::_WHAT_<",
+					"end": ">",
+					"name": "markup.other.log.warn",
+					"contentName": "markup.other.log.warn",
+					"patterns": [ {"include": "#tparams"} ]
+				},
+				{
 					"match": "~*\\^~*",
 					"name": "markup.other.log.warn"
 				},
@@ -53,23 +69,7 @@
 					"match": "[ \\t]+[0-9]+[ \\t]+\\|(.*)$",
 					"captures": { "1": { "name": "markup.other.log.warn" } }
 				}
-			],
-			"repository": {
-				"tparams": {
-				   "begin": "<",
-				   "end": ">",
-				   "patterns": [
-						{
-							"begin": "\"",
-							"end": "\"",
-							"name": "markup.bold.log.error"
-						},
-					  	{
-							"include": "#tparams"
-						}
-				   ]
-				}
-			}
+			]
 		},
 		"clang": {
 			"patterns": [
@@ -78,11 +78,11 @@
 		"msvc": {
 			"patterns": [
 				{
-					"match": "error C[0-9]+: .*$",
+					"match": "\\berror C[0-9]+(?=:)",
 					"name": "markup.other.log.error"
 				},
 				{
-					"match": "warning C[0-9]+: .*$",
+					"match": "\\bwarning C[0-9]+(?=:)",
 					"name": "markup.other.log.warn"
 				}
 			]
@@ -102,9 +102,20 @@
 					"name": "markup.other.log.error"
 				}
 			]
+		},
+		"tparams": {
+		   "begin": "<",
+		   "end": ">",
+		   "patterns": [
+				{
+					"begin": "\"",
+					"end": "\"",
+					"name": "markup.bold.log.error"
+				},
+				  {
+					"include": "#tparams"
+				}
+		   ]
 		}
 	}
 }
-
-
-

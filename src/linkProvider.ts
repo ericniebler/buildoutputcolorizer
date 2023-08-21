@@ -23,7 +23,7 @@ const winLocalLink = `(?:${winPathPrefix}|${winFileName}|)(?:${winPathSeparator}
 
 /**
  * As xterm reads from DOM, space in that case is nonbreaking char ASCII code - 160,
- * replacing space with nonBreakningSpace or space ASCII code - 32.
+ * replacing space with nonBreakingSpace or space ASCII code - 32.
  */
 const lineAndColumn = [
     // "(file path)", line 45 [see #40468]
@@ -48,6 +48,7 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
     private processCwd: string | undefined;
     private localLinkPattern: RegExp;
     private currentWorkspaceFolder: vscode.WorkspaceFolder | undefined;
+    private currentFileUri: vscode.Uri | undefined;
 
     //private configuration: IConfiguration;
     private lineSeparator: RegExp = /\r?\n/;
@@ -56,7 +57,12 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
         const baseLocalLink = process.platform === 'win32' ? winLocalLink : unixLocalLink;
 
         // Append line and column number regex
-        this.localLinkPattern = new RegExp(`(?<path>${baseLocalLink})(${lineAndColumn})`, 'g');
+        let pattern = [
+            `(?<path1>${baseLocalLink})(${lineAndColumn})`,
+            `\\bat line (?<line6>\\d+) of "(?<path2>${baseLocalLink})"`,
+            `\\bat line (?<line7>\\d+)$`
+        ].join('|');
+        this.localLinkPattern = new RegExp(pattern, 'g');
 
         this.currentWorkspaceFolder = vscode.workspace.workspaceFolders?.at(0);
     }
@@ -94,7 +100,9 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
             }
             let start = match.index;
             let end = match.index + match[0].length;
-            let linkUrl = match.groups?.path;
+            let linkUrl = match.groups?.path1 ??
+                          match.groups?.path2 ??
+                          (match.groups?.line7 ? this.currentFileUri?.fsPath : undefined);
             if (!linkUrl) {
                 continue;
             }
@@ -113,7 +121,7 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
                 continue;
             }
 
-            let fileUri = vscode.Uri.file(linkUrl);
+            this.currentFileUri = vscode.Uri.file(linkUrl);
 
             // Fetch the line and column
             let uriLineNumber = 1;
@@ -123,7 +131,9 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
                              match.groups?.line2 ??
                              match.groups?.line3 ??
                              match.groups?.line4 ??
-                             match.groups?.line5;
+                             match.groups?.line5 ??
+                             match.groups?.line6 ??
+                             match.groups?.line7;
             if (lineString) {
                 uriLineNumber = parseInt(lineString, 10);
 
@@ -138,7 +148,7 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
             }
 
             // Create a link target by combining the URI with the line and column
-            const linkTarget = fileUri.with({ fragment: `${uriLineNumber},${uriColumnNumber}` });
+            const linkTarget = this.currentFileUri.with({ fragment: `${uriLineNumber},${uriColumnNumber}` });
 
             results.push(new vscode.DocumentLink(new vscode.Range(new vscode.Position(lineNumber, start), new vscode.Position(lineNumber, end)), linkTarget));
         }

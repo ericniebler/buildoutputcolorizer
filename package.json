@@ -1,9 +1,9 @@
 {
 	"name": "erics-build-output-colorizer",
-	"publisher": "EricNiebler",
+	"publisher": "ericniebler",
 	"displayName": "Eric's Build Output Colorizer",
 	"description": "Colorizes output log for VSCode hosted builds",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"engines": {
 		"vscode": "^1.77.0"
 	},
