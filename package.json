@@ -3,7 +3,7 @@
 	"publisher": "ericniebler",
 	"displayName": "Eric's Build Output Colorizer",
 	"description": "Colorizes output log for VSCode hosted builds",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"engines": {
 		"vscode": "^1.77.0"
 	},

@@ -59,7 +59,7 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
         // Append line and column number regex
         let pattern = [
             `(?<path1>${baseLocalLink})(${lineAndColumn})`,
-            `\\bat line (?<line6>\\d+) of "(?<path2>${baseLocalLink})"`,
+            `\\bat line (?<line6>\\d+) of "?(?<path2>${baseLocalLink})"?`,
             `\\bat line (?<line7>\\d+)$`
         ].join('|');
         this.localLinkPattern = new RegExp(pattern, 'g');

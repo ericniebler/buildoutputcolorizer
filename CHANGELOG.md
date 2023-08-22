@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.2
+* Recognize file:line output from nvcc
+
 ## 0.2.1
 * Recognize file:line output from nvc++
 * Bug fixes
