@@ -77,6 +77,12 @@
 						"settings": {
 							"foreground": "#19ff04"
 						}
+					},
+					{
+						"scope": "markup.other.log.hidden",
+						"settings": {
+							"foreground": "#00000000"
+						}
 					}
 				]
 			}

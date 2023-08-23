@@ -45,21 +45,30 @@
 					"end": ">",
 					"name": "markup.other.log.error",
 					"contentName": "markup.other.log.error",
-					"patterns": [ {"include": "#tparams"} ]
+					"patterns": [
+						{"include": "#tparams"},
+						{"include": "#mstring"}
+					]
 				},
 				{
 					"begin": "stdexec::_WARNING_<",
 					"end": ">",
 					"name": "markup.other.log.warn",
 					"contentName": "markup.other.log.warn",
-					"patterns": [ {"include": "#tparams"} ]
+					"patterns": [
+						{"include": "#tparams"},
+						{"include": "#mstring"}
+					]
 				},
 				{
 					"begin": "exec::_FAILURE_TO_CONNECT_::_WHAT_<",
 					"end": ">",
 					"name": "markup.other.log.warn",
 					"contentName": "markup.other.log.warn",
-					"patterns": [ {"include": "#tparams"} ]
+					"patterns": [
+						{"include": "#tparams"},
+						{"include": "#mstring"}
+					]
 				},
 				{
 					"match": "~*\\^~*",
@@ -104,18 +113,39 @@
 			]
 		},
 		"tparams": {
-		   "begin": "<",
-		   "end": ">",
-		   "patterns": [
+			"begin": "<",
+			"end": ">",
+			"patterns": [
 				{
 					"begin": "\"",
 					"end": "\"",
 					"name": "markup.bold.log.error"
 				},
-				  {
+				{
 					"include": "#tparams"
+				},
+				{
+					"include": "#mstring"
 				}
-		   ]
+			]
+		},
+		"mstring": {
+			"match": "__mstring<\\d+UL>\\{\\{(.*?)'\\\\000'\\}\\}",
+			"captures": {
+				"1": {
+					"name": "markup.other.log.hidden",
+					"patterns": [
+						{
+							"match": "'\\\\?(.)'",
+							"captures": {
+								"1": {
+									"name": "markup.bold.log.error"
+								}
+							}
+						}
+					]
+				}
+			}
 		}
 	}
 }
