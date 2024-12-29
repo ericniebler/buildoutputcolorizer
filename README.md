@@ -61,3 +61,9 @@ Refactor syntax rules and add CMake specific highlighting.
 
 ### 0.1.5
 Correct issue that breaks hyperlinks to files
+
+### 0.1.6
+Add requested syntax highlight for MSVC linker erros
+
+### 0.1.7
+Add CMake syntax highlights for pass/fail of configuration
