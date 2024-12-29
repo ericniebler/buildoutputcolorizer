@@ -4,7 +4,9 @@
   "displayName": "Build Output Colorizer",
   "description": "Colorizes output log for VSCode hosted builds",
   "version": "0.1.7",
-  "repository": { "url": "https://github.com/sgbush/buildoutputcolorizer" },
+  "repository": {
+    "url": "https://github.com/sgbush/buildoutputcolorizer"
+  },
   "license": "MIT",
   "icon": "assets/icon.png",
   "engines": {
@@ -17,26 +19,36 @@
     "configurationDefaults": {
       "editor.tokenColorCustomizations": {
         "textMateRules": [
-            {
-              "scope" : "markup.other.log.error",
-              "settings": { "foreground": "#FF0000" }
-            },
-            {
-              "scope" : "markup.other.log.warn",
-              "settings": { "foreground": "#c500f7cc" }
-            },
-            {
-              "scope" : "markup.other.log.info",
-              "settings": { "foreground": "#2cd3c5" }
-            },
-            {
-              "scope" : "markup.other.log.debug",
-              "settings": { "foreground": "#888585" }
-            },
-            {
-              "scope" : "markup.other.log.highlight",
-              "settings": { "foreground": "#19ff04" }
+          {
+            "scope": "markup.other.log.error",
+            "settings": {
+              "foreground": "#FF0000"
             }
+          },
+          {
+            "scope": "markup.other.log.warn",
+            "settings": {
+              "foreground": "#c500f7cc"
+            }
+          },
+          {
+            "scope": "markup.other.log.info",
+            "settings": {
+              "foreground": "#2cd3c5"
+            }
+          },
+          {
+            "scope": "markup.other.log.debug",
+            "settings": {
+              "foreground": "#888585"
+            }
+          },
+          {
+            "scope": "markup.other.log.highlight",
+            "settings": {
+              "foreground": "#19ff04"
+            }
+          }
         ]
       }
     },
@@ -44,7 +56,13 @@
       {
         "id": "Log",
         "configuration": "./language-configuration.json",
-        "mimetypes": [ "log", "text/log", "text/x-log", "text/x-code-output", "x-code-output" ]
+        "mimetypes": [
+          "log",
+          "text/log",
+          "text/x-log",
+          "text/x-code-output",
+          "x-code-output"
+        ]
       }
     ],
     "grammars": [
@@ -58,8 +76,8 @@
         }
       }
     ]
-
+  },
+  "dependencies": {
+    "@vscode/vsce": "^3.2.1"
   }
 }
-
-
