@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.3
+* Style `mstring`s as output by nvc++ for readability
+
 ## 0.2.2
 * Recognize file:line output from nvcc
 
