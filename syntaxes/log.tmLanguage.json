@@ -91,6 +91,10 @@
 					"name": "markup.other.log.error"
 				},
 				{
+					"match": "error LNK[0-9]+: .*$",
+					"name": "markup.other.log.error"
+				},
+				{
 					"match": "\\bwarning C[0-9]+(?=:)",
 					"name": "markup.other.log.warn"
 				}
@@ -107,8 +111,24 @@
 					"name": "markup.other.log.highlight"
 				},
 				{
-					"match": "FAILED:",
+					"match": "Configuring done.*$",
+					"name": "markup.other.log.highlight"
+				},
+				{
+					"match": "Generating done.*$",
+					"name": "markup.other.log.highlight"
+				},
+				{
+					"match": "FAILED:.*$",
 					"name": "markup.other.log.error"
+				},
+				{
+					"match": "CMake Error at.*$",
+					"name": "markup.other.log.error"
+				},
+				{
+					"match": "Build files have been.*$",
+					"name": "markup.other.log.highlight"
 				}
 			]
 		},

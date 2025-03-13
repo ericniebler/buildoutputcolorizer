@@ -5,7 +5,8 @@
             "name": "Debug",
             "hidden": true,
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_DEPENDS_USE_COMPILER": "FALSE"
             }
         },
         {
@@ -18,7 +19,8 @@
             ],
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "cl.exe",
-                "CMAKE_MAKE_PROGRAM": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja\\ninja.exe"
+                "CMAKE_MAKE_PROGRAM": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja\\ninja.exe",
+                "CMAKE_DEPENDS_USE_COMPILER": "FALSE"
             },
             "environment": {
                 "CXXFLAGS": "/Wall"
@@ -33,7 +35,8 @@
                 "Debug"
             ],
             "cacheVariables": {
-                "CMAKE_CXX_COMPILER": "gcc"
+                "CMAKE_CXX_COMPILER": "gcc",
+                "CMAKE_DEPENDS_USE_COMPILER": "FALSE"
             },
             "environment": {
                 "CXXFLAGS": "-Wall -Wextra -Wpedantic -Wconversion"
@@ -48,7 +51,8 @@
                 "Debug"
             ],
             "cacheVariables": {
-                "CMAKE_CXX_COMPILER": "clang"
+                "CMAKE_CXX_COMPILER": "clang",
+                "CMAKE_DEPENDS_USE_COMPILER": "FALSE"
             },
             "environment": {
                 "CXXFLAGS": "-Wall -Wextra -Wpedantic -Wconversion"
@@ -63,7 +67,8 @@
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
                 "CMAKE_C_COMPILER": "/usr/bin/clang-16",
                 "CMAKE_CXX_COMPILER": "/usr/bin/clang++-16",
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_DEPENDS_USE_COMPILER": "FALSE"
             }
         }
     ],
