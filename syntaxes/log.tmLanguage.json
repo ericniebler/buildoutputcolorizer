@@ -41,8 +41,8 @@
 					"name": "markup.other.log.info"
 				},
 				{
-					"begin": "stdexec::_ERROR_<",
-					"end": ">",
+					"begin": "\\b_ERROR_?<",
+					"end": "(?<!-)>",
 					"name": "markup.other.log.error",
 					"contentName": "markup.other.log.error",
 					"patterns": [
@@ -51,18 +51,8 @@
 					]
 				},
 				{
-					"begin": "stdexec::_WARNING_<",
-					"end": ">",
-					"name": "markup.other.log.warn",
-					"contentName": "markup.other.log.warn",
-					"patterns": [
-						{"include": "#tparams"},
-						{"include": "#mstring"}
-					]
-				},
-				{
-					"begin": "exec::_FAILURE_TO_CONNECT_::_WHAT_<",
-					"end": ">",
+					"begin": "\\b_WARNING_?<",
+					"end": "(?<!-)>",
 					"name": "markup.other.log.warn",
 					"contentName": "markup.other.log.warn",
 					"patterns": [
